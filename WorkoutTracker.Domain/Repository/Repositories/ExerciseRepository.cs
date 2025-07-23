@@ -22,7 +22,7 @@ public class ExerciseRepository(DataContext context) : IExerciseRepository
 
     public async Task<ExerciseModel> GetByIdAsync(int id)
     {
-        return await context.Exercises.FirstOrDefaultAsync(e => e.Id == id) ?? throw new Exception("cipka");
+        return await context.Exercises.FirstOrDefaultAsync(e => e.Id == id);
     }
 
     public async Task UpdateAsync()

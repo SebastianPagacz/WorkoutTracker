@@ -10,7 +10,7 @@ public class ExerciseModel
     
     [Required]
     [MaxLength(100)]
-    public string ExerciseName { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
     
     [Required]
     public BodyPartEnum BodyPart { get; set; }

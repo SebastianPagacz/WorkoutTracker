@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using WorkoutPlanner.Application;
 using WorkoutTracker.Domain.Repository;
 using WorkoutTracker.Domain.Repository.Repositories;
 
@@ -16,6 +18,10 @@ public class Program
 
         // Repositories
         builder.Services.AddScoped<IExerciseRepository, ExerciseRepository>();
+
+        builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AssemblyReference).Assembly));
+
+        builder.Services.AddAutoMapper(cfg => { }, typeof(Domain.AssemblyReference));
 
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
