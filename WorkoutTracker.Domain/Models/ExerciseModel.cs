@@ -14,4 +14,6 @@ public class ExerciseModel
     
     [Required]
     public BodyPartEnum BodyPart { get; set; }
+
+    public bool IsDeleted { get; set; }
 }
