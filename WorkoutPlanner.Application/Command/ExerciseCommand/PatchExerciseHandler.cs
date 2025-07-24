@@ -2,6 +2,7 @@
 using MediatR;
 using WorkoutTracker.Domain.Dto;
 using WorkoutTracker.Domain.Enums;
+using WorkoutTracker.Domain.Exceptions;
 using WorkoutTracker.Domain.Repository.Repositories;
 
 namespace WorkoutPlanner.Application.Command.ExerciseCommand;
@@ -13,9 +14,9 @@ public class PatchExerciseHandler(IExerciseRepository repository, IMapper mapper
         var existingExercise = await repository.GetByIdAsync(request.Id);
 
         if (existingExercise == null || existingExercise.IsDeleted)
-            throw new Exception("TODO: add custom");
+            throw new ItemNotFoundException($"Exercise {request.Id} was not found");
 
-        if(!string.IsNullOrEmpty(request.Name))
+        if (!string.IsNullOrEmpty(request.Name))
             existingExercise.Name = request.Name;
 
         if(request.BodyPart != null && request.BodyPart != 0)

@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using WorkoutPlanner.Application;
 using WorkoutTracker.Domain.Repository;
 using WorkoutTracker.Domain.Repository.Repositories;
+using WorkoutTracker.Service.Middleware;
 
 namespace WorkoutTracker.Service;
 
@@ -41,9 +42,10 @@ public class Program
 
         app.UseAuthorization();
 
+        app.UseMiddleware<GlobalExceptionHandling>();
 
         app.MapControllers();
-
+        
         app.Run();
     }
 }
