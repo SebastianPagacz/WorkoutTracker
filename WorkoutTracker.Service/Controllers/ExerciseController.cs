@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using WorkoutPlanner.Application.Command.ExerciseCommand;
 using WorkoutPlanner.Application.Query.ExerciseQuery;
 using WorkoutTracker.Domain.Dto;
 using WorkoutTracker.Domain.Models;
@@ -9,13 +10,17 @@ namespace WorkoutTracker.Service.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class ExerciseController(IExerciseRepository repository, IMediator mediator) : ControllerBase
+public class ExerciseController(IMediator mediator) : ControllerBase
 {
     [HttpPost]
-    public async Task<IActionResult> Post(ExerciseModel exercise)
+    public async Task<IActionResult> Post(ExerciseDto exercise)
     {
-        await repository.AddASync(exercise);
-        return StatusCode(200, exercise);
+        var result = await mediator.Send(new AddExerciseCommand
+        {
+            Name = exercise.Name,
+            BodyPart = exercise.BodyPart,
+        });
+        return StatusCode(200, result);
     }
 
     [HttpGet]
@@ -28,31 +33,29 @@ public class ExerciseController(IExerciseRepository repository, IMediator mediat
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-            var result = await repository.GetByIdAsync(id);
-            return StatusCode(200, result);
+        var result = await mediator.Send(new GetExerciseByIdQuery { Id = id });
+
+        return StatusCode(200, result);
     }
 
     [HttpPatch("{id}")]
     public async Task<IActionResult> Patch(int id, ExerciseDto exercise)
     {
-        var existing = await repository.GetByIdAsync(id);
+        var result = await mediator.Send(new PatchExerciseCommand 
+        {
+            Id = id,
+            Name = exercise.Name,
+            BodyPart = exercise.BodyPart,
+        });
 
-        existing.Name = exercise.Name;
-        existing.BodyPart = exercise.BodyPart;
-
-        await repository.UpdateAsync();
-
-        return StatusCode(200, existing);
+        return StatusCode(200, result);
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var existing = await repository.GetByIdAsync(id);
+        var result = await mediator.Send(new DeleteExerciseCommand { Id = id });
 
-        existing.IsDeleted = true;
-
-        await repository.UpdateAsync();
-        return StatusCode(200, new { Message = $"Succesfully deleted exercise {id}"});
+        return StatusCode(200, result);
     }
 }
