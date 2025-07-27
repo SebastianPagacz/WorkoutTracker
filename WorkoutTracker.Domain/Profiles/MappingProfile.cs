@@ -9,5 +9,7 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         CreateMap<ExerciseModel, ExerciseDto>();
+
+        CreateMap<SetModel,  SetDto>();
     }
 }

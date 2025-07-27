@@ -19,6 +19,7 @@ public class Program
 
         // Repositories
         builder.Services.AddScoped<IExerciseRepository, ExerciseRepository>();
+        builder.Services.AddScoped<ISetRepository, SetRepository>();
 
         builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AssemblyReference).Assembly));
 

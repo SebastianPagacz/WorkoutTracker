@@ -9,9 +9,10 @@ public class SetModel
     [Required]
     [MaxLength(100)]
     public string Name { get; set; } = string.Empty;
-
+    public int Repetitions { get; set; }
     public decimal Weigth { get; set; }
     
+    // Relations
     public int ExerciseId { get; set; }
     public ExerciseModel Exercise { get; set; } = default!;
 
