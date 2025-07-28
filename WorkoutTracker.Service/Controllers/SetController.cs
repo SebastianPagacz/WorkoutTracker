@@ -18,7 +18,6 @@ public class SetController(IMediator mediator) : ControllerBase
     {
         var result = await mediator.Send(new AddSetCommand
         {
-            Name = set.Name,
             Repetitions = set.Repetitions,
             Weigth = set.Weigth,
             ExerciseId = exerciseId,
@@ -32,6 +31,27 @@ public class SetController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> Get()
     {
         var result = await mediator.Send(new GetSetsCommand());
+
+        return StatusCode(200, result);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var result = await mediator.Send(new GetSetByIdQuery { Id = id });
+
+        return StatusCode(200, result);
+    }
+
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> Patch(int id, SetDto set)
+    {
+        var result = await mediator.Send(new PatchSetCommand
+        {
+            Id = id,
+            Repetitions = set.Repetitions,
+            Weigth = set.Weigth,
+        });
 
         return StatusCode(200, result);
     }

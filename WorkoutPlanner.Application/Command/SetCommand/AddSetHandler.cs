@@ -16,7 +16,6 @@ public class AddSetHandler(ISetRepository setRepository, IExerciseRepository exe
 
         var newSet = new SetModel
         {
-            Name = request.Name,
             Repetitions = request.Repetitions,
             Weigth = request.Weigth,
             ExerciseId = request.ExerciseId,

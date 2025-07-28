@@ -8,9 +8,9 @@ public class SetModel
 
     [Required]
     [MaxLength(100)]
-    public string Name { get; set; } = string.Empty;
     public int Repetitions { get; set; }
     public decimal Weigth { get; set; }
+    public bool IsDeleted { get; set; } = false;
     
     // Relations
     public int ExerciseId { get; set; }
