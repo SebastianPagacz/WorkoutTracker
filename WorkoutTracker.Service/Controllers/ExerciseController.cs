@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using WorkoutPlanner.Application.Command.ExerciseCommand;
 using WorkoutPlanner.Application.Query.ExerciseQuery;
 using WorkoutTracker.Domain.Dto;
-using WorkoutTracker.Domain.Models;
-using WorkoutTracker.Domain.Repository.Repositories;
 
 namespace WorkoutTracker.Service.Controllers;
 

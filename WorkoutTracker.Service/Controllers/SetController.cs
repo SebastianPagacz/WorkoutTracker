@@ -1,8 +1,5 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Cryptography.X509Certificates;
 using WorkoutPlanner.Application.Command.SetCommand;
 using WorkoutPlanner.Application.Query.SetQuery;
 using WorkoutTracker.Domain.Dto;
