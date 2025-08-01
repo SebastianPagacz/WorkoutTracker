@@ -11,5 +11,7 @@ public class MappingProfile : Profile
         CreateMap<ExerciseModel, ExerciseDto>();
 
         CreateMap<SetModel,  SetDto>();
+
+        CreateMap<WorkoutModel, WorkoutDto>();
     }
 }

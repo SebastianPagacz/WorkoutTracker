@@ -7,4 +7,5 @@ public class WorkoutModel
     public int Id { get; set; }
     public DateOnly Date { get; set; }
     public string Name { get; set; } = string.Empty;
+    public bool IsDeleted { get; set; } = false;
 }
