@@ -52,4 +52,12 @@ public class SetController(IMediator mediator) : ControllerBase
 
         return StatusCode(200, result);
     }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var result = await mediator.Send(new DeleteSetCommand { Id = id });
+
+        return StatusCode(200, result);
+    }
 }

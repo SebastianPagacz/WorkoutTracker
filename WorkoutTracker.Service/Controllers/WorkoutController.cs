@@ -30,4 +30,33 @@ public class WorkoutController(IMediator mediator) : ControllerBase
 
         return StatusCode(200, result);
     }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var result = await mediator.Send(new GetWorkoutByIdQuery { Id = id });
+
+        return StatusCode(200, result);
+    }
+
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> Patch(int id, WorkoutDto data)
+    {
+        var result = await mediator.Send(new PatchWorkoutCommand
+        {
+            Id = id,
+            Name = data.Name,
+            Date = data.Date,
+        });
+
+        return StatusCode(200, result);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var result = await mediator.Send(new DeleteWorkoutCommand { Id = id });
+
+        return StatusCode(200, result);
+    }
 }
